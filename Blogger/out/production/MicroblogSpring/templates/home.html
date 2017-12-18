@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <script src="/jquery.js" ></script>
+    <script src="/script.js" ></script>
+</head>
+
+<body>
+{{^name}} <!-- ^ denotes does NOT exist, run this code -->
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter your name" name="userName"/>
+    <button type="submit">Login</button>
+</form>
+{{/name}}
+{{#name}}
+Hello, {{.}}!
+
+<form action="/add-message" method="post">
+    <input type="text" placeholder="Enter your message" name="message"/>
+    <button type="submit">Post</button>
+</form>
+
+<ul>
+    {{#messages}}
+    <li class="message-list-item">
+        {{id}} {{messageText}}
+
+        <div class="modify-post" style="display:none;">
+            <form action = "/delete-message" method="post">
+                <input type="hidden" name="id" value="{{id}}" />
+                <button type="submit">delete</button>
+            </form>
+
+            <form action = "/update-message" method="post">
+                <input type="hidden" name="id" value="{{id}}" />
+                <input type="text" placeholder="updated message" name="update" />
+                <button type="submit">update</button>
+
+            </form>
+        </div>
+    </li>
+    {{/messages}}
+</ul>
+{{/name}}
+
+
+
+</body>
+</html>
